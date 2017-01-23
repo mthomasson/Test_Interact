@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="loginApp" ng-controller="loginCtrl">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 	<title>Login</title>
+	 	<link rel="stylesheet" href="../librairies/bootstrap/css/bootstrap.min.css">
+	 	<link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="../librairies/angular-material/angular-material.min.css">
+
+    </head>
+	<body>
+    <md-toolbar md-scroll-shrink="">
+        <div class="md-toolbar-tools">Login</div>
+    </md-toolbar>
+
+		<!--<div layout="column" layout-align="center center">-->
+			<form layout="column" layout-align="center center" layout-padding="40px">
+				<div class="loginBox md-whiteframe-z5" >
+                    <md-content class="md-padding" layout="column">
+                            <md-input-container>
+                                <label> Email address</label>
+                                <input type="email" ng-model="user.email">
+                            </md-input-container>
+                            <md-input-container>
+                                <label> Password</label>
+                                <input type="password" ng-model="user.pwd">
+                            </md-input-container>
+                            <div layout="row" layout-align="center center" style="padding-top:20px">
+                                <md-button class="md-raised md-primary" ng-click="logAuth()">Login</md-button>
+                            </div>
+                        </md-content>
+
+                </div>
+			</form>
+		<!-- Javascript -->
+		<script src="../librairies/jquery/jquery-3.1.1.min.js"></script>
+		<!--<script src="librairies/bootstrap/js/bootstrap.min.js"></script>-->
+		<script src="../librairies/angular/angular.min.js"></script>
+        <script src="../librairies/angular-animate/angular-animate.js"></script>
+        <script src="../librairies/angular-aria/angular-aria.js"></script>
+        <script src="../librairies/angular-material/angular-material.js"></script>
+        <script src="../librairies/angular-messages/angular-messages.js"></script>
+
+		<script src="../librairies/ngStorage/ngStorage.js"></script>
+		<script src="../librairies/ngCookies/angular-cookies.min.js"></script>
+		<script src="js/services/LoginService.js"></script>
+		<script src="js/application/LoginApp.js"></script>
+		<script src="js/controllers/LoginController.js"></script>
+
+	</body>
+</html>
