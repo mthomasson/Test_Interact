@@ -21,7 +21,7 @@
         <div class="repeatContainer">
             <md-content layout="column">
                 <md-virtual-repeat-container id="vertical-container">
-                    <div md-virtual-repeat="item in items" class="repeated-item" flex><!-- ng-click="itemClicked()">-->
+                    <div md-virtual-repeat="item in items" class="repeated-item" md-on-demand="" flex><!-- ng-click="itemClicked()">-->
                         <h4>{{item['name']}}</h4>
                         <p>{{item['emails']}}</p>
                         <p>{{item['phoneNumbers']}}</p>
