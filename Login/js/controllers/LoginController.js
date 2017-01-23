@@ -15,9 +15,9 @@ function loginCrtFnt($scope, $log, login, $window, $sessionStorage, $mdToast, $t
 		futurContent.then(
 			function(payload){
                 $timeout($scope.openToastSuccess);
-				$log.info("payload  :  ", payload);
-                $log.info("payload.user  :  ", payload.user);
-                $log.info("payload.token  :  ", payload.token);
+				//$log.info("payload  :  ", payload);
+                //$log.info("payload.user  :  ", payload.user);
+                //$log.info("payload.token  :  ", payload.token);
                 $sessionStorage.user = payload.user;
                 $sessionStorage.token = payload.token;
 				$log.info($sessionStorage.user);

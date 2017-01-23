@@ -1,15 +1,20 @@
 .repeatContainer #vertical-container {
-	height: 450px;
+	height: 85vh;
 	width: 400px;
 }
 
 .repeatContainer .repeated-item {
 	border-bottom: 1px solid #ddd;
 	box-sizing: border-box;
-	height: 60px;
+	display:block;
+	overflow:auto;
 	padding-top: 10px;
 }
 
 .repeatContainer md-content {
 	margin: 16px;
 }
+.md-toolbar-tools {
+	height:10vh;
+}
+

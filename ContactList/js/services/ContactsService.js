@@ -11,7 +11,7 @@ function contactsFnc($http, $q, $log) {
 	function GetContacts(token){
 		var deferred = $q.defer();
 
-        $http.defaults.headers['authToken'] = token;
+        $http.defaults.headers.common['authToken'] = token;
 
         $log.info($http.defaults.headers);
         var URL_GetContacts = "https://internal-api-staging-lb.interact.io/v2/contacts";

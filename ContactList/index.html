@@ -11,20 +11,23 @@
 
     </head>
 	<body>
-    <md-toolbar md-scroll-shrink="">
-        <div class="md-toolbar-tools">
-            <!--<div style="text-align:left">My Contacts</div>-->
-            <div style="text-align:right">{{username}}</div>
-        </div>
-    </md-toolbar>
-    <div class="repeatContainer">
-        <md-content layout="column">
-            <md-virtual-repeat-container id="vertical-container">
-                <div md-virtual-repeat="item in items" class="repeated-item" flex ng-click="itemClicked()">
-                    <h3>{{item}}</h3>
-                </div>
-            </md-virtual-repeat-container>
-        </md-content>
+        <md-toolbar md-scroll-shrink="" layout="row">
+            <div class="md-toolbar-tools">
+                <div>{{username}}</div>
+                <span flex></span>
+                <md-button ng-click="logout()">Logout</md-button>
+            </div>
+        </md-toolbar>
+        <div class="repeatContainer">
+            <md-content layout="column">
+                <md-virtual-repeat-container id="vertical-container">
+                    <div md-virtual-repeat="item in items" class="repeated-item" flex><!-- ng-click="itemClicked()">-->
+                        <h4>{{item['name']}}</h4>
+                        <p>{{item['emails']}}</p>
+                        <p>{{item['phoneNumbers']}}</p>
+                    </div>
+                </md-virtual-repeat-container>
+            </md-content>
     </div>
 
 		<!-- Javascript -->
