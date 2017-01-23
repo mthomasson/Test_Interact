@@ -11,8 +11,8 @@ function authFnc($http, $q) {
 	function authAsk(email,pwd){
 		var deferred = $q.defer();
 
-		var URL_Connection = "";
-		$http.post(URL_Connection, {'email':login,'password':pwd})
+		var URL_Connection = "https://internal-api-staging-lb.interact.io/v2/login?cached=true";
+		$http.post(URL_Connection, {'username':email,'password':pwd})
    			.then(function successCallback(response) {
     				return deferred.resolve(response.data);
   				}, function errorCallback(response) {
