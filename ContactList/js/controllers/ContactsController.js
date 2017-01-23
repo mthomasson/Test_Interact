@@ -22,6 +22,7 @@ function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
         itemList:[],
 
         getItemAtIndex: function(index) {
+            $log.info("index : ", index);
             if (index > this.numLoaded_ && index<=nbContacts) {
                     this.fetchMoreItems_(index);
                 return null;
@@ -30,7 +31,7 @@ function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
             return this.itemList[index];
         },
         getLength: function() {
-            return this.numLoaded_ + 10;
+            return this.numLoaded_ + 1;
         },
         fetchMoreItems_: function(index) {
             // For demo purposes, we simulate loading more items with a timed
@@ -43,8 +44,8 @@ function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
             $log.info("index : ", index);
             if (this.toLoad_ < index && index<=nbContacts) {
                 if (this.numLoaded_ != nbContacts) {
-                    if(this.toLoad_ + 20 < nbContacts) {
-                        this.toLoad_ += 20;
+                    if(this.toLoad_ + 10 < nbContacts) {
+                        this.toLoad_ += 10;
                     }
                     else{
                         this.toLoad_ = nbContacts;
@@ -84,9 +85,8 @@ function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
                                                 JSONToAddToItem['phoneNumbers'] = phones;
                                             }
                                         }
-                                        if (JSONToAddToItem != {}) {
+                                            $log.info(JSONToAddToItem);
                                             this.itemList.push(JSONToAddToItem);
-                                        }
                                     }
                                 }
                             }));
@@ -112,11 +112,6 @@ function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
             $sessionStorage.$reset();
             $window.location.href = '../Login/index.html';
         });
-
-        //TODO ADD LOGOUTSERVICE TO API !!!!!!!!!!!!!!!!!!
-        //$http.defaults.headers.common['authToken'] = "";
-
-
     }
     
 }

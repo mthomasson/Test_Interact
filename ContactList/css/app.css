@@ -1,13 +1,12 @@
 .repeatContainer #vertical-container {
-	height: 85vh;
+	height: 500px;
 	width: 400px;
 }
 
 .repeatContainer .repeated-item {
 	border-bottom: 1px solid #ddd;
 	box-sizing: border-box;
-	display:block;
-	overflow:auto;
+	height: 130px;
 	padding-top: 10px;
 }
 
