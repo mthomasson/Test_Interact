@@ -1,12 +1,12 @@
 angular.module('contactsApp').controller('contactsCtrl',contactsCrtFnt);
 
-contactsCrtFnt.$inject=['$scope','$log','$window', '$sessionStorage', 'contacts'];
+contactsCrtFnt.$inject=['$scope','$log','$window', '$sessionStorage', 'contacts', 'contactsParser'];
 
-function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
+function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts, contactsParser){
 
     //$log.info("in contact controller");
     $sessionStorage.sync;
-    var nbContacts = 5;
+    var nbContacts = 6;
 
     try {
         $scope.username = $sessionStorage.user['firstName'] + ' ' + $sessionStorage.user['lastName'];
@@ -23,15 +23,14 @@ function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
 
         getItemAtIndex: function(index) {
             $log.info("index : ", index);
-            if (index > this.numLoaded_ && index<=nbContacts) {
+            if (index > this.numLoaded_) {
                     this.fetchMoreItems_(index);
                 return null;
             }
-
             return this.itemList[index];
         },
         getLength: function() {
-            return this.numLoaded_ + 1;
+            return this.numLoaded_ + 3;
         },
         fetchMoreItems_: function(index) {
             // For demo purposes, we simulate loading more items with a timed
@@ -42,53 +41,29 @@ function contactsCrtFnt($scope, $log, $window, $sessionStorage, contacts){
             $log.info("this.toLoad_ : ", this.toLoad_);
             $log.info("nbContacts : ", nbContacts);
             $log.info("index : ", index);
-            if (this.toLoad_ < index && index<=nbContacts) {
-                if (this.numLoaded_ != nbContacts) {
+            if (this.toLoad_ < index) {
+                if (this.numLoaded_ < nbContacts) {
                     if(this.toLoad_ + 10 < nbContacts) {
                         this.toLoad_ += 10;
                     }
                     else{
                         this.toLoad_ = nbContacts;
                     }
+
                     try {
-                        contacts.GetContacts($sessionStorage.token['authToken'], this.numLoaded_, this.toLoad_)
+                        contacts.GetContacts($sessionStorage.token['authToken'], this.numLoaded_, 10)
                             .then(angular.bind(this, function (payload) {
                                 this.numLoaded_ += payload.data.length;
                                 $log.info(payload);
 
                                 nbContacts = payload["count"];
+
                                 for (var i = 0; i < payload.data.length; i += 1) {
-                                    var JSONToAddToItem = {};
-                                    if (payload.data[i].displayName != null) {
-                                        JSONToAddToItem["name"] = payload.data[i].displayName;
-                                        if (payload.data[i].emails != null) {
-                                            if (payload.data[i].emails.length > 0) {
-                                                var email = "";
-                                                for (var j = 0; j < payload.data[i].emails.length; j += 1) {
-                                                    email += payload.data[i].emails[j].email;
-                                                    if (j < payload.data[i].emails.length - 1) {
-                                                        email += " / ";
-                                                    }
-                                                }
-                                                JSONToAddToItem['emails'] = email;
-                                            }
-                                        }
-                                        if (payload.data[i].phoneNumbers != null) {
-                                            if (payload.data[i].phoneNumbers.length > 0) {
-                                                var phones = "";
-                                                for (var j = 0; j < payload.data[i].phoneNumbers.length; j += 1) {
-                                                    phones += payload.data[i].phoneNumbers[j].number;
-                                                    if (j < payload.data[i].phoneNumbers.length - 1) {
-                                                        phones += " / ";
-                                                    }
-                                                }
-                                                JSONToAddToItem['phoneNumbers'] = phones;
-                                            }
-                                        }
-                                            $log.info(JSONToAddToItem);
-                                            this.itemList.push(JSONToAddToItem);
+                                    var contactToAdd = contactsParser.parseContact(payload.data[i]);
+                                            $log.info(contactToAdd);
+                                            this.itemList.push(contactToAdd);
                                     }
-                                }
+
                             }));
                     } catch (e) {
                         $log.info(e);
